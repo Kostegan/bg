@@ -2,8 +2,8 @@ package com.bg.db;
 
 import java.io.*;
 
-public class DB implements IDB {
-    private final String FILENAME = "/home/kostegan/java_work/bg/src/main/resources/words.txt";
+public class SimpleDB implements IDB {
+    private final String FILENAME = "C:\\java_work\\bg\\src\\main\\resources\\words.txt";
 
     @Override
     public void storeData(String str) {
@@ -12,17 +12,18 @@ public class DB implements IDB {
 
     @Override
     public String receiveData() {
-        return null;
+        return readFromFile();
     }
 
     private String readFromFile() {
         BufferedReader br = null;
         FileReader fr = null;
+        String str = "Base is empty";
 
         try {
             File file = new File(FILENAME);
             if (!file.exists()) {
-                return "Base is empty";
+                return str;
             }
             fr = new FileReader(FILENAME);
             br = new BufferedReader(fr);
@@ -30,20 +31,19 @@ public class DB implements IDB {
             String currentLine;
             StringBuilder stringBuilder = new StringBuilder();
             while ((currentLine = br.readLine()) != null) {
-                stringBuilder.append(currentLine + "/n");
+                stringBuilder.append(currentLine);
             }
-            return stringBuilder.toString();
+            str = stringBuilder.toString();
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return str;
     }
 
     private void storeToFile(String str) {
         BufferedWriter bw = null;
         FileWriter fw = null;
-
         try {
             File file = new File(FILENAME);
             if (!file.exists()) {
@@ -52,8 +52,8 @@ public class DB implements IDB {
 
             fw = new FileWriter(file.getAbsoluteFile(), true);
             bw = new BufferedWriter(fw);
-
             bw.write(str);
+            bw.newLine();
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {

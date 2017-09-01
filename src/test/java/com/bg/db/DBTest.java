@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 public class DBTest {
     private IDB createDB(){
-        return null;
+        return new SimpleDB();
     }
 
     @Test
