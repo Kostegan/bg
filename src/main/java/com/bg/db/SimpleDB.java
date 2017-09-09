@@ -3,7 +3,8 @@ package com.bg.db;
 import java.io.*;
 
 public class SimpleDB implements IDB {
-    private final String FILENAME = "C:\\java_work\\bg\\src\\main\\resources\\words.txt";
+//    private final String FILENAME = "C:\\java_work\\bg\\src\\main\\resources\\words.txt";
+    private final String FILENAME = "/home/kostegan/java_work/bg/src/main/resources/words.txt";
 
     @Override
     public void storeData(String str) {
